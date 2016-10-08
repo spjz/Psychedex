@@ -5,7 +5,6 @@ use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\ModuleDefinitionInterface;
-use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 
 class Module implements ModuleDefinitionInterface
@@ -55,7 +54,6 @@ class Module implements ModuleDefinitionInterface
 			$view->registerEngines(
 				[
 					".volt" => VoltEngine::class,
-				  //".phtml" => PhpEngine::class,
 				]
 			);
 

@@ -16,7 +16,7 @@ $di = new FactoryDefault();
 /**
  * Registering a router
  */
-$di['router'] = function () {
+$di->set('router', function () {
 
 	$router = new Router();
 
@@ -27,8 +27,20 @@ $di['router'] = function () {
 
 	$router->removeExtraSlashes(true);
 
+	$router->add("/api/auth/login", [
+			'module' => 'api',
+			'controller' => 'auth',
+			'action' => 'index',
+	]);
+
+	$router->add("/api/chemical/family/list", [
+		'module' => 'api',
+		'controller' => 'chemicalfamily',
+		'action' => 'list',
+	]);
+
 	return $router;
-};
+});
 
 /**
  * The URL component is used to generate all kind of urls in the application
@@ -39,6 +51,7 @@ $di['url'] = function () {
 
 	return $url;
 };
+
 
 /**
  * Start the session the first time some component request the session service

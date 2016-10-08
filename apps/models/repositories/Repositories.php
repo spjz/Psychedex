@@ -5,6 +5,11 @@ use Modules\Models\Repositories\Exceptions;
 
 abstract class Repositories
 {
+	/**
+	 * @param $name
+	 * @return mixed
+	 * @throws Exceptions\InvalidRepositoryException
+	 */
 	public static function getRepository($name)
 	{
 		$className = "\\Modules\\Models\\Repositories\\Repository\\{$name}";

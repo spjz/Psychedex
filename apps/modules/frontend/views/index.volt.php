@@ -42,9 +42,9 @@
 		<div class="row expanded">
 			<div class="medium-6 columns">
 				<ul class="menu">
-					<li><a href="#">Legal</a></li>
-					<li><a href="#">Partner</a></li>
-					<li><a href="#">Explore</a></li>
+					<li><a href="#">What is this</a></li>
+					<li><a href="#">I dont</a></li>
+					<li><a href="#">even know</a></li>
 				</ul>
 			</div>
 			<div class="medium-6 columns">
