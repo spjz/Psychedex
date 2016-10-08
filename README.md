@@ -1,6 +1,7 @@
 # Psychedex
 * Version: Alpha
-* Author: sPJz <io@spjz.uk>
+* Author: [sPJz](io@spjz.uk)
+
 ---
 ## Installation
 ### .\public
