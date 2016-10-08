@@ -28,12 +28,14 @@ $di->set('router', function () {
 	$router->removeExtraSlashes(true);
 
 	$router->add("/api/auth/login", [
+			'namespace' => 'Psychedex\Modules\Api\Controllers',
 			'module' => 'api',
 			'controller' => 'auth',
 			'action' => 'index',
 	]);
 
 	$router->add("/api/chemical/family/list", [
+		'namespace' => 'Psychedex\Modules\Api\Controllers',
 		'module' => 'api',
 		'controller' => 'chemicalfamily',
 		'action' => 'list',
