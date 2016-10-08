@@ -7,13 +7,13 @@ use Phalcon\Http\Response;
 class ChemicalfamilyController extends ControllerBase
 {
 
-	public function list()
+	public function listAction()
 	{
 		$response = new Response();
 
-		$a = ['wat' => true];
+		$a = ["wat" => true];
 
-		$response->setJsonContent(json_encode($a));
+		$response->setJsonContent($a);
 
 		return $response;
 	}
