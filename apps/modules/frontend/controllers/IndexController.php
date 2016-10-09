@@ -1,7 +1,7 @@
 <?php
 namespace Psychedex\Modules\Frontend\Controllers;
 
-use \Modules\Models\Services\Services as Services;
+use \Psychedex\Models\Services\Services as Services;
 
 class IndexController extends ControllerBase
 {

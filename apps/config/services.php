@@ -34,7 +34,7 @@ $di->set('router', function () {
 	$router = new Router();
 
 	$router->setDefaultModule("frontend");
-	//$router->setDefaultNamespace("Psychedex\\Modules\\Frontend\\Controllers");
+	$router->setDefaultNamespace("Psychedex\\Modules\\Frontend\\Controllers");
 
 	$router->setUriSource(\Phalcon\Mvc\Router::URI_SOURCE_SERVER_REQUEST_URI);
 
