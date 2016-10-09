@@ -4,7 +4,7 @@ namespace Psychedex\Routes;
 
 use Phalcon\Mvc\Router\Group as RouterGroup;
 
-class ChemicalFamilyRoutes extends RouterGroup
+class ChemicalFamily extends RouterGroup
 {
 	public function initialize()
 	{

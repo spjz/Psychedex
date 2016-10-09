@@ -8,12 +8,23 @@ use Phalcon\Mvc\Router;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Psychedex\Routes\ChemicalFamilyRoutes;
+use Psychedex\Routes\ChemicalFamily;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
 $di = new FactoryDefault();
+
+/**
+ * Register shared namespaces
+ */
+$loader = new Loader();
+$loader->registerNamespaces(
+	[
+		'Psychedex\Routes' => __DIR__ . '/../routes/',
+	]
+);
+$loader->register();
 
 /**
  * Registering a router
@@ -36,24 +47,7 @@ $di->set('router', function () {
 	//		'action' => 'index',
 	//]);
 
-	//$chemicalFamily = new RouterGroup(
-	//	[
-	//		'namespace' => 'Psychedex\Modules\Api\Controllers',
-	//		'module' => 'api',
-	//		'controller' => 'chemicalfamily',
-	//	]
-	//);
-	//$chemicalFamily->addGet("/api/chemical/family/list", ['action' => 'list',]);
-	//$chemicalFamily->addGet("/api/chemical/family/search/{ref}", ['action' => 'search']);
-	//$chemicalFamily->addPost("/api/chemical/family/create", ['action' => 'create']);
-	//$chemicalFamily->addPut("/api/chemical/family/update/{id}", ['action' => 'update']);
-	//$chemicalFamily->addDelete("/api/chemical/family/delete/{id}", ['action' => 'delete']);
-
-	$loader = new Loader();
-	$loader->registerNamespaces(['Psychedex\Routes' => __DIR__ . '../routes/',]);
-	$loader->register();
-
-	$router->mount(new \Psychedex\Routes\ChemicalFamilyRoutes());
+	$router->mount(new Psychedex\Routes\ChemicalFamily());
 
 	return $router;
 });
