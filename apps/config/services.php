@@ -3,11 +3,12 @@
  * Services are globally registered in this file
  */
 
+use Phalcon\Loader;
 use Phalcon\Mvc\Router;
-use Phalcon\Mvc\Router\Group as RouterGroup;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Psychedex\Routes\ChemicalFamilyRoutes;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -35,51 +36,24 @@ $di->set('router', function () {
 	//		'action' => 'index',
 	//]);
 
-	$router->addGet(
-		"/api/chemical/family/list",
-		[
-			'namespace' => 'Psychedex\Modules\Api\Controllers',
-			'module' => 'api',
-			'controller' => 'chemicalfamily',
-			'action' => 'list',
-		]
-	);
-	$router->addGet(
-		"/api/chemical/family/search/{ref}",
-		[
-			'namespace' => 'Psychedex\Modules\Api\Controllers',
-			'module' => 'api',
-			'controller' => 'chemicalfamily',
-			'action' => 'search',
-		]
-	);
-	$router->addPost(
-		"/api/chemical/family/create",
-		[
-			'namespace' => 'Psychedex\Modules\Api\Controllers',
-			'module' => 'api',
-			'controller' => 'chemicalfamily',
-			'action' => 'create',
-		]
-	);
-	$router->addPut(
-		"/api/chemical/family/update/{id}",
-		[
-			'namespace' => 'Psychedex\Modules\Api\Controllers',
-			'module' => 'api',
-			'controller' => 'chemicalfamily',
-			'action' => 'update',
-		]
-	);
-	$router->addDelete(
-		"/api/chemical/family/delete/{id}",
-		[
-			'namespace' => 'Psychedex\Modules\Api\Controllers',
-			'module' => 'api',
-			'controller' => 'chemicalfamily',
-			'action' => 'delete',
-		]
-	);
+	//$chemicalFamily = new RouterGroup(
+	//	[
+	//		'namespace' => 'Psychedex\Modules\Api\Controllers',
+	//		'module' => 'api',
+	//		'controller' => 'chemicalfamily',
+	//	]
+	//);
+	//$chemicalFamily->addGet("/api/chemical/family/list", ['action' => 'list',]);
+	//$chemicalFamily->addGet("/api/chemical/family/search/{ref}", ['action' => 'search']);
+	//$chemicalFamily->addPost("/api/chemical/family/create", ['action' => 'create']);
+	//$chemicalFamily->addPut("/api/chemical/family/update/{id}", ['action' => 'update']);
+	//$chemicalFamily->addDelete("/api/chemical/family/delete/{id}", ['action' => 'delete']);
+
+	$loader = new Loader();
+	$loader->registerNamespaces(['Psychedex\Routes' => __DIR__ . '../routes/',]);
+	$loader->register();
+
+	$router->mount(new \Psychedex\Routes\ChemicalFamilyRoutes());
 
 	return $router;
 });
