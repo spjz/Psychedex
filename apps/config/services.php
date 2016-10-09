@@ -41,9 +41,9 @@ $di->set('router', function () {
 	$router->removeExtraSlashes(true);
 
 	$router
-		->mount(new ApiRoutes\ChemicalFamily())
-		->mount(new ApiRoutes\ChemicalMoiety())
-		->mount(new ApiRoutes\ChemicalProperty());
+		->mount(new ApiRoutes\ChemicalFamilies())
+		->mount(new ApiRoutes\ChemicalMoieties())
+		->mount(new ApiRoutes\ChemicalProperties());
 
 	return $router;
 });
