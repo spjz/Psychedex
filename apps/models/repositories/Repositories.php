@@ -1,7 +1,7 @@
 <?php
-namespace Modules\Models\Repositories;
+namespace Psychedex\Models\Repositories;
 
-use Modules\Models\Repositories\Exceptions;
+use Psychedex\Models\Repositories\Exceptions;
 
 abstract class Repositories
 {
@@ -12,7 +12,7 @@ abstract class Repositories
 	 */
 	public static function getRepository($name)
 	{
-		$className = "\\Modules\\Models\\Repositories\\Repository\\{$name}";
+		$className = "\\Psychedex\\Models\\Repositories\\Repository\\{$name}";
 
 		if (! class_exists($className)) {
 			throw new Exceptions\InvalidRepositoryException("Repository {$className} doesn't exists.");
@@ -20,4 +20,13 @@ abstract class Repositories
 
 		return new $className();
 	}
+
+	/**
+	 * @return Repository\ChemicalFamily
+	 */
+	public static function getChemicalFamilyRepository()
+	{
+		return new \Psychedex\Models\Repositories\Repository\ChemicalFamily();
+	}
+
 }

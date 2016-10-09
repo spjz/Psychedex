@@ -1,12 +1,12 @@
 <?php
-namespace Modules\Models\Services\Service;
+namespace Psychedex\Models\Services\Service;
 
-use Modules\Models\Repositories\Repositories;
+use Psychedex\Models\Repositories\Repositories;
 
 class User
 {
-	public function getLast()
-	{
-		return Repositories::getRepository('User')->getLast();
-	}
+    public function getLast()
+    {
+        return Repositories::getRepository('User')->getLast();
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Models\Entities;
+namespace Psychedex\Models\Entities;
 
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\PresenceOf;
@@ -63,7 +63,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	/**
 	 * @return string
 	 */
-	public function getImage(): string
+	public function getImage()
 	{
 		return $this->image;
 	}
@@ -126,7 +126,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	 */
 	public function getSource()
 	{
-		return 'chemical_familes';
+		return 'chemical_families';
 	}
 
 	/**

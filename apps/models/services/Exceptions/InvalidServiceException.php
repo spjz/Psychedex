@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Models\Services\Exceptions;
+namespace Psychedex\Models\Services\Exceptions;
 
 class InvalidServiceException extends \Exception
 {

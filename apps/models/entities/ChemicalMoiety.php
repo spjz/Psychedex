@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Models\Entities;
+namespace Psychedex\Models\Entities;
 
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\PresenceOf;

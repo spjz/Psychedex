@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Models\Repositories\Exceptions;
+namespace Psychedex\Models\Repositories\Exceptions;
 
 class InvalidRepositoryException extends \Exception
 {

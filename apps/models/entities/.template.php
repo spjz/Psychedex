@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Models\Entities;
+namespace Psychedex\Models\Entities;
 
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Uniqueness;
 
-class User extends \Phalcon\Mvc\Model
+class Template extends \Phalcon\Mvc\Model
 {
 
 	/**

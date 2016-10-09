@@ -20,9 +20,9 @@ class Module implements ModuleDefinitionInterface
 		$loader->registerNamespaces(
 			[
 				'Psychedex\Modules\Api\Controllers' => __DIR__ . '/controllers/',
-				'Modules\Models\Entities' => __DIR__ . '/../../models/entities/',
-				'Modules\Models\Services' => __DIR__ . '/../../models/services/',
-				'Modules\Models\Repositories' => __DIR__ . '/../../models/repositories/'
+				'Psychedex\Models\Entities' => __DIR__ . '/../../models/entities/',
+				'Psychedex\Models\Services' => __DIR__ . '/../../models/services/',
+				'Psychedex\Models\Repositories' => __DIR__ . '/../../models/repositories/'
 			]
 		);
 

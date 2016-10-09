@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Models\Entities;
+namespace Psychedex\Models\Entities;
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
 use Phalcon\Validation;

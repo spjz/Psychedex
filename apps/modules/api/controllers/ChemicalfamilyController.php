@@ -2,20 +2,282 @@
 
 namespace Psychedex\Modules\Api\Controllers;
 
+use Psychedex\Models\Services\Services;
 use Phalcon\Http\Response;
+use Psychedex\Models\Repositories\Repositories;
+use Psychedex\Models\Entities\ChemicalFamily as Entity;
 
 class ChemicalfamilyController extends ControllerBase
 {
 
+	/**
+	 * List all
+	 *
+	 * @return Response $response
+	 */
 	public function listAction()
 	{
-		$response = new Response();
+		$errors = [];
+		$data = [];
 
-		$a = ["wat" => true];
+		$result = Services::getChemicalService()->getFamilies();
 
-		$response->setJsonContent($a);
+		if (!count($result))
+		{
+			$status = [
+				"code" => 200,
+				"message" => "OK",
+			];
+			$errors[] = "No results";
+		}
+		else
+		{
+			$status = [
+				"code" => 200,
+				"message" => "OK",
+			];
+			foreach ($result as $row)
+			{
+				$data[] = [
+					"id" => $row->getId,
+					"name" => $row->name,
+					"image" => $row->image,
+				];
+			}
+		}
 
-		return $response;
+		return $this->respond($status, $errors, $data);
 	}
 
+	/**
+	 * Search by $ref
+	 *
+	 * @param int|string $ref
+	 * @return Response $response
+	 */
+	public function searchAction($ref)
+	{
+		if (!is_numeric($ref))
+		{
+			$errors = [];
+			$data = [];
+
+			$result = Services::getChemicalService()->getFamiliesByName($ref);
+
+			if (!count($result))
+			{
+				$status = [
+					"code" => 200,
+					"message" => "OK",
+				];
+				$errors[] = "No results";
+			}
+			else
+			{
+				$status = [
+					"code" => 200,
+					"message" => "OK",
+				];
+				foreach ($result as $row)
+				{
+					$data[] = [
+						"id" => $row->id,
+						"name" => $row->name,
+						"image" => $row->image,
+					];
+				}
+			}
+
+			return $this->respond($status, $errors, $data);
+		}
+		else
+		{
+
+			$errors = [];
+			$data = [];
+
+			$result = Services::getChemicalService()->getFamilyById($ref);
+
+			if (!count($result))
+			{
+				$status = [
+					"code" => 200,
+					"message" => "OK",
+				];
+				$errors[] = "No results";
+			}
+			else
+			{
+				$status = [
+					"code" => 200,
+					"message" => "OK",
+				];
+				foreach ($result as $row)
+				{
+					$data[] = [
+						"id" => $row->id,
+						"name" => $row->name,
+						"image" => $row->image,
+					];
+				}
+			}
+
+			return $this->respond($status, $errors, $data);
+		}
+	}
+
+	/**
+	 * Insert new row
+	 *
+	 * @return Response $response
+	 */
+	public function createAction()
+	{
+		$errors = [];
+		$data = get_object_vars($this->request->getJsonRawBody());
+
+		$entity = new Entity();
+
+		foreach ($data as $key => $value)
+		{
+			!array_key_exists($key, $entity->columnMap())
+				? $errors[] = "Unknown: " . $key
+				: null
+			;
+		}
+
+		if (!count($errors))
+		{
+			if ($entity->create($data))
+			{
+				$status = [
+					"code" => 201,
+					"message" => "Created",
+				];
+
+				$data['id'] = $entity->getId();
+			}
+			else
+			{
+				$status = [
+					"code" => 409,
+					"message" => "Conflict",
+				];
+				foreach ($entity->getMessages() as $message)
+				{
+					$errors[] = $message;
+				}
+			}
+		}
+		else
+		{
+			$status = [
+				"code" => 400,
+				"message" => "Bad request",
+			];
+		}
+
+		return $this->respond($status, $errors, $data);
+	}
+
+	/**
+	 * Update by $id
+	 *
+	 * @param int $id
+	 * @return Response $response
+	 */
+	public function updateAction($id)
+	{
+
+		$errors = [];
+		$data = $this->request->getJsonRawBody();
+
+		$entity = new Entity();
+
+		foreach ($data as $key => $value)
+		{
+			!array_key_exists($key, $entity->columnMap())
+				? $errors[] = "Unknown: " . $key
+				: null
+			;
+		}
+
+		if (!count($errors))
+		{
+			if ($entity->update($data))
+			{
+				$status = [
+					"code" => 200,
+					"message" => "OK",
+				];
+			}
+			else
+			{
+				$status = [
+					"code" => 409,
+					"message" => "Conflict",
+				];
+				foreach ($entity->getMessages() as $message)
+				{
+					$errors[] = $message;
+				}
+			}
+		}
+		else
+		{
+			$status = [
+				"code" => 400,
+				"message" => "Bad request",
+			];
+		}
+
+		return $this->respond($status, $errors, $data);
+	}
+
+	/**
+	 * Delete by $id
+	 *
+	 * @param $id
+	 * @return Response $response
+	 * @internal param int $id
+	 */
+	public function deleteAction($id)
+	{
+		$errors = [];
+		$data = [];
+
+		$entity = Entity::findFirst($id);
+
+		if ($entity)
+		{
+
+			if ($entity->delete())
+			{
+				$status = [
+					"code" => 200,
+					"message" => "OK",
+				];
+			}
+			else
+			{
+				$status = [
+					"code" => 409,
+					"message" => "Conflict",
+				];
+				foreach ($entity->getMessages() as $message)
+				{
+					$errors[] = $message;
+				}
+			}
+		}
+		else
+		{
+			$status = [
+				"code" => 400,
+				"message" => "Bad request",
+			];
+		}
+
+		return $this->respond($status, $errors, $data);
+	}
 }
