@@ -36,7 +36,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	 * @param int $id
 	 * @return ChemicalFamily
 	 */
-	public function setId(int $id): ChemicalFamily
+	public function setId(int $id)
 	{
 		$this->id = $id;
 		return $this;
@@ -45,7 +45,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	/**
 	 * @return string
 	 */
-	public function getName(): string
+	public function getName()
 	{
 		return $this->name;
 	}
@@ -54,7 +54,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	 * @param string $name
 	 * @return ChemicalFamily
 	 */
-	public function setName(string $name): ChemicalFamily
+	public function setName($name)
 	{
 		$this->name = $name;
 		return $this;
@@ -72,7 +72,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	 * @param string $image
 	 * @return ChemicalFamily
 	 */
-	public function setImage(string $image): ChemicalFamily
+	public function setImage($image)
 	{
 		$this->image = $image;
 		return $this;
@@ -132,7 +132,7 @@ class ChemicalFamily extends \Phalcon\Mvc\Model
 	/**
 	 * @return array
 	 */
-	public function columnMap()
+	public static function columnMap()
 	{
 		return [
 			'id' => 'id',

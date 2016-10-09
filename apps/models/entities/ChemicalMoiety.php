@@ -115,9 +115,13 @@ class ChemicalMoiety extends \Phalcon\Mvc\Model
 	public function validation()
 	{
 		$validation = (new Validation())
-			->add('name', new PresenceOf(["message" => "Missing: name",]))
-			->add('name', new Uniqueness(["message" => "Conflict: name"]))
-			->add('formula', new PresenceOf(["message" => "Missing: name",])
+			->add(
+				['name', 'formula'],
+				new PresenceOf
+				(["message" =>
+						 ['name' => "Missing: name", 'formula' => 'Missing: formula']
+					]))
+			->add('name', new Uniqueness(["message" => "Conflict: name"])
 		);
 
 		return $this->validate($validation);

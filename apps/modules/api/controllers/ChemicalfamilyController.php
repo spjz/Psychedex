@@ -140,7 +140,7 @@ class ChemicalfamilyController extends ControllerBase
 
 		foreach ($data as $key => $value)
 		{
-			!array_key_exists($key, $entity->columnMap())
+			!array_key_exists($key, Entity::columnMap())
 				? $errors[] = "Unknown: " . $key
 				: null
 			;
@@ -165,7 +165,7 @@ class ChemicalfamilyController extends ControllerBase
 				];
 				foreach ($entity->getMessages() as $message)
 				{
-					$errors[] = $message;
+					$errors[] = $message->getMessage();
 				}
 			}
 		}
@@ -190,13 +190,13 @@ class ChemicalfamilyController extends ControllerBase
 	{
 
 		$errors = [];
-		$data = $this->request->getJsonRawBody();
+		$data = get_object_vars($this->request->getJsonRawBody());
 
-		$entity = new Entity();
+		$entity = Entity::findFirst($id);
 
 		foreach ($data as $key => $value)
 		{
-			!array_key_exists($key, $entity->columnMap())
+			!array_key_exists($key, Entity::columnMap())
 				? $errors[] = "Unknown: " . $key
 				: null
 			;
@@ -219,7 +219,7 @@ class ChemicalfamilyController extends ControllerBase
 				];
 				foreach ($entity->getMessages() as $message)
 				{
-					$errors[] = $message;
+					$errors[] = $message->getMessage();
 				}
 			}
 		}
@@ -266,15 +266,15 @@ class ChemicalfamilyController extends ControllerBase
 				];
 				foreach ($entity->getMessages() as $message)
 				{
-					$errors[] = $message;
+					$errors[] = $message->getMessage();
 				}
 			}
 		}
 		else
 		{
 			$status = [
-				"code" => 400,
-				"message" => "Bad request",
+				"code" => 404,
+				"message" => "Not found",
 			];
 		}
 
