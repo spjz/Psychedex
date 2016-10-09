@@ -40,13 +40,6 @@ $di->set('router', function () {
 
 	$router->removeExtraSlashes(true);
 
-	//$router->add("/api/auth/login", [
-	//		'namespace' => 'Psychedex\Modules\Api\Controllers',
-	//		'module' => 'api',
-	//		'controller' => 'auth',
-	//		'action' => 'index',
-	//]);
-
 	$router
 		->mount(new ApiRoutes\ChemicalFamily())
 		->mount(new ApiRoutes\ChemicalMoiety())

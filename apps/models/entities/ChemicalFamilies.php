@@ -104,7 +104,12 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	 */
 	public function initialize()
 	{
-		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalFamilies', 'chemical_family_id', ['alias' => 'MoleculeChemicalFamilies']);
+		$this->hasMany(
+			'id',
+			'Psychedex\Models\Entities\MoleculeChemicalFamilies',
+			'chemical_family_id',
+			['alias' => 'MoleculeChemicalFamilies']
+		);
 	}
 
 	/**
@@ -122,7 +127,9 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 			);
 		$validation
 			->add('name', new Validation\Validator\PresenceOf())
-			->add('name', new Validation\Validator\Uniqueness()
+			->add(
+				'name',
+				new Validation\Validator\Uniqueness()
 			);
 
 		return $this->validate($validation);

@@ -5,154 +5,174 @@ namespace Psychedex\Models\Entities;
 class TaxonomyIndex extends \Phalcon\Mvc\Model
 {
 
-    /**
-     *
-     * @var integer
-     * @Primary
-     * @Identity
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    protected $id;
+	/**
+	 *
+	 * @var integer
+	 * @Primary
+	 * @Identity
+	 * @Column(type="integer", length=11, nullable=false)
+	 */
+	protected $id;
 
-    /**
-     *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    protected $taxonomy_rank_id;
+	/**
+	 *
+	 * @var integer
+	 * @Column(type="integer", length=11, nullable=false)
+	 */
+	protected $taxonomy_rank_id;
 
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=64, nullable=false)
-     */
-    protected $name;
+	/**
+	 *
+	 * @var string
+	 * @Column(type="string", length=64, nullable=false)
+	 */
+	protected $name;
 
-    /**
-     * Method to set the value of field id
-     *
-     * @param integer $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
+	/**
+	 * Method to set the value of field id
+	 *
+	 * @param integer $id
+	 * @return $this
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Method to set the value of field taxonomy_rank_id
-     *
-     * @param integer $taxonomy_rank_id
-     * @return $this
-     */
-    public function setTaxonomyRankId($taxonomy_rank_id)
-    {
-        $this->taxonomy_rank_id = $taxonomy_rank_id;
+	/**
+	 * Method to set the value of field taxonomy_rank_id
+	 *
+	 * @param integer $taxonomy_rank_id
+	 * @return $this
+	 */
+	public function setTaxonomyRankId($taxonomy_rank_id)
+	{
+		$this->taxonomy_rank_id = $taxonomy_rank_id;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Method to set the value of field name
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+	/**
+	 * Method to set the value of field name
+	 *
+	 * @param string $name
+	 * @return $this
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the value of field id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Returns the value of field id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Returns the value of field taxonomy_rank_id
-     *
-     * @return integer
-     */
-    public function getTaxonomyRankId()
-    {
-        return $this->taxonomy_rank_id;
-    }
+	/**
+	 * Returns the value of field taxonomy_rank_id
+	 *
+	 * @return integer
+	 */
+	public function getTaxonomyRankId()
+	{
+		return $this->taxonomy_rank_id;
+	}
 
-    /**
-     * Returns the value of field name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/**
+	 * Returns the value of field name
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->hasMany('id', 'Psychedex\Models\Entities\SubstanceSources', 'taxonomy_index_id', ['alias' => 'SubstanceSources']);
-        $this->hasMany('id', 'Psychedex\Models\Entities\TaxonomyConstituents', 'taxonomy_index_id', ['alias' => 'TaxonomyConstituents']);
-        $this->hasMany('id', 'Psychedex\Models\Entities\TaxonomyIdentifiers', 'taxonomy_index_id', ['alias' => 'TaxonomyIdentifiers']);
-        $this->belongsTo('taxonomy_rank_id', 'Psychedex\Models\Entities\TaxonomyRanks', 'id', ['alias' => 'TaxonomyRanks']);
-    }
+	/**
+	 * Initialize method for model.
+	 */
+	public function initialize()
+	{
+		$this->hasMany(
+			'id',
+			'Psychedex\Models\Entities\SubstanceSources',
+			'taxonomy_index_id',
+			['alias' => 'SubstanceSources']
+		);
+		$this->hasMany(
+			'id',
+			'Psychedex\Models\Entities\TaxonomyConstituents',
+			'taxonomy_index_id',
+			['alias' => 'TaxonomyConstituents']
+		);
+		$this->hasMany(
+			'id',
+			'Psychedex\Models\Entities\TaxonomyIdentifiers',
+			'taxonomy_index_id',
+			['alias' => 'TaxonomyIdentifiers']
+		);
+		$this->belongsTo(
+			'taxonomy_rank_id',
+			'Psychedex\Models\Entities\TaxonomyRanks',
+			'id',
+			['alias' => 'TaxonomyRanks']
+		);
+	}
 
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'taxonomy_index';
-    }
+	/**
+	 * Returns table name mapped in the model.
+	 *
+	 * @return string
+	 */
+	public function getSource()
+	{
+		return 'taxonomy_index';
+	}
 
-    /**
-     * Allows to query a set of records that match the specified conditions
-     *
-     * @param mixed $parameters
-     * @return TaxonomyIndex[]
-     */
-    public static function find($parameters = null)
-    {
-        return parent::find($parameters);
-    }
+	/**
+	 * Allows to query a set of records that match the specified conditions
+	 *
+	 * @param mixed $parameters
+	 * @return TaxonomyIndex[]
+	 */
+	public static function find($parameters = null)
+	{
+		return parent::find($parameters);
+	}
 
-    /**
-     * Allows to query the first record that match the specified conditions
-     *
-     * @param mixed $parameters
-     * @return TaxonomyIndex
-     */
-    public static function findFirst($parameters = null)
-    {
-        return parent::findFirst($parameters);
-    }
+	/**
+	 * Allows to query the first record that match the specified conditions
+	 *
+	 * @param mixed $parameters
+	 * @return TaxonomyIndex
+	 */
+	public static function findFirst($parameters = null)
+	{
+		return parent::findFirst($parameters);
+	}
 
-    /**
-     * Independent Column Mapping.
-     * Keys are the real names in the table and the values their names in the application
-     *
-     * @return array
-     */
-    public function columnMap()
-    {
-        return [
-            'id' => 'id',
-            'taxonomy_rank_id' => 'taxonomy_rank_id',
-            'name' => 'name'
-        ];
-    }
+	/**
+	 * Independent Column Mapping.
+	 * Keys are the real names in the table and the values their names in the application
+	 *
+	 * @return array
+	 */
+	public function columnMap()
+	{
+		return [
+			'id' => 'id',
+			'taxonomy_rank_id' => 'taxonomy_rank_id',
+			'name' => 'name'
+		];
+	}
 
 }

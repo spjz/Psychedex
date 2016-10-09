@@ -104,7 +104,12 @@ class ChemicalProperties extends \Phalcon\Mvc\Model
 	 */
 	public function initialize()
 	{
-		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalProperties', 'chemical_property_id', ['alias' => 'MoleculeChemicalProperties']);
+		$this->hasMany(
+			'id',
+			'Psychedex\Models\Entities\MoleculeChemicalProperties',
+			'chemical_property_id',
+			['alias' => 'MoleculeChemicalProperties']
+		);
 	}
 
 	/**
@@ -121,8 +126,10 @@ class ChemicalProperties extends \Phalcon\Mvc\Model
 				]
 			);
 		$validation
-			->add(['name','unit'], new Validation\Validator\PresenceOf())
-			->add('name', new Validation\Validator\Uniqueness()
+			->add(['name', 'unit'], new Validation\Validator\PresenceOf())
+			->add(
+				'name',
+				new Validation\Validator\Uniqueness()
 			);
 		return $this->validate($validation);
 	}

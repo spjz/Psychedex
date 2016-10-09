@@ -134,7 +134,12 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 */
 	public function initialize()
 	{
-		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalMoieties', 'chemical_moiety_id', ['alias' => 'MoleculeChemicalMoieties']);
+		$this->hasMany(
+			'id',
+			'Psychedex\Models\Entities\MoleculeChemicalMoieties',
+			'chemical_moiety_id',
+			['alias' => 'MoleculeChemicalMoieties']
+		);
 	}
 
 	/**
@@ -151,8 +156,10 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 				]
 			);
 		$validation
-			->add(['name','formula'], new Validation\Validator\PresenceOf())
-			->add('name', new Validation\Validator\Uniqueness()
+			->add(['name', 'formula'], new Validation\Validator\PresenceOf())
+			->add(
+				'name',
+				new Validation\Validator\Uniqueness()
 			);
 		return $this->validate($validation);
 	}
