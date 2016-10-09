@@ -7,5 +7,6 @@
 ### .\public
 * `npm install`
 * `bower install`
+
 ### MySQL
-* `mysql -u username -p < database.sql'
+* `mysql -u username -p < database.sql`
