@@ -8,7 +8,7 @@ use Phalcon\Mvc\Router;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Psychedex\Routes\ChemicalFamily;
+use Psychedex\Modules\Api\Routes as ApiRoutes;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -21,7 +21,7 @@ $di = new FactoryDefault();
 $loader = new Loader();
 $loader->registerNamespaces(
 	[
-		'Psychedex\Routes' => __DIR__ . '/../routes/',
+		'Psychedex\Modules\Api\Routes' => __DIR__ . '/../modules/api/routes/',
 	]
 );
 $loader->register();
@@ -47,7 +47,7 @@ $di->set('router', function () {
 	//		'action' => 'index',
 	//]);
 
-	$router->mount(new Psychedex\Routes\ChemicalFamily());
+	$router->mount(new ApiRoutes\ChemicalFamily());
 
 	return $router;
 });
@@ -61,7 +61,6 @@ $di['url'] = function () {
 
 	return $url;
 };
-
 
 /**
  * Start the session the first time some component request the session service

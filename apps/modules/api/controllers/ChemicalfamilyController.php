@@ -39,7 +39,7 @@ class ChemicalfamilyController extends ControllerBase
 			foreach ($result as $row)
 			{
 				$data[] = [
-					"id" => $row->getId,
+					"id" => $row->id,
 					"name" => $row->name,
 					"image" => $row->image,
 				];

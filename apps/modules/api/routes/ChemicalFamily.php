@@ -1,6 +1,6 @@
 <?php
 
-namespace Psychedex\Routes;
+namespace Psychedex\Modules\Api\Routes;
 
 use Phalcon\Mvc\Router\Group as RouterGroup;
 
