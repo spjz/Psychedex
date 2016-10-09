@@ -22,11 +22,27 @@ abstract class Repositories
 	}
 
 	/**
-	 * @return Repository\ChemicalFamily
+	 * @return Repository\ChemicalFamilies
 	 */
-	public static function getChemicalFamilyRepository()
+	public static function getChemicalFamiliesRepository()
 	{
-		return new \Psychedex\Models\Repositories\Repository\ChemicalFamily();
+		return new \Psychedex\Models\Repositories\Repository\ChemicalFamilies();
+	}
+
+	/**
+	 * @return Repository\ChemicalMoieties
+	 */
+	public static function getChemicalMoietiesRepository()
+	{
+		return new \Psychedex\Models\Repositories\Repository\ChemicalMoieties();
+	}
+
+	/**
+	 * @return Repository\ChemicalProperties
+	 */
+	public static function getChemicalPropertiesRepository()
+	{
+		return new \Psychedex\Models\Repositories\Repository\ChemicalProperties();
 	}
 
 }

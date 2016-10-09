@@ -47,7 +47,10 @@ $di->set('router', function () {
 	//		'action' => 'index',
 	//]);
 
-	$router->mount(new ApiRoutes\ChemicalFamily());
+	$router
+		->mount(new ApiRoutes\ChemicalFamily())
+		->mount(new ApiRoutes\ChemicalMoiety())
+		->mount(new ApiRoutes\ChemicalProperty());
 
 	return $router;
 });

@@ -5,12 +5,15 @@ use Psychedex\Models\Repositories\Repositories;
 
 class Chemical
 {
+
+	// Chemical Family
+
 	/**
 	 * @return mixed
 	 */
 	public function getFamilies()
 	{
-		return Repositories::getChemicalFamilyRepository()->getAll();
+		return Repositories::getChemicalFamiliesRepository()->getAll();
 	}
 
 	/**
@@ -19,7 +22,7 @@ class Chemical
 	 */
 	public function getFamilyById($id)
 	{
-		return Repositories::getChemicalFamilyRepository()->getById($id);
+		return Repositories::getChemicalFamiliesRepository()->getById($id);
 	}
 
 	/**
@@ -28,6 +31,63 @@ class Chemical
 	 */
 	public function getFamiliesByName($name)
 	{
-		return Repositories::getChemicalFamilyRepository()->getByName($name);
+		return Repositories::getChemicalFamiliesRepository()->getByName($name);
 	}
+
+	// Chemical Moiety
+
+	/**
+	 * @return mixed
+	 */
+	public function getMoieties()
+	{
+		return Repositories::getChemicalMoietiesRepository()->getAll();
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getMoietyById($id)
+	{
+		return Repositories::getChemicalMoietiesRepository()->getById($id);
+	}
+
+	/**
+	 * @param $name
+	 * @return mixed
+	 */
+	public function getMoietiesByName($name)
+	{
+		return Repositories::getChemicalMoietiesRepository()->getByName($name);
+	}
+
+	// Chemical Property
+
+	/**
+	 * @return mixed
+	 */
+	public function getProperties()
+	{
+		return Repositories::getChemicalPropertiesRepository()->getAll();
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getPropertyById($id)
+	{
+		return Repositories::getChemicalPropertiesRepository()->getById($id);
+	}
+
+	/**
+	 * @param $name
+	 * @return mixed
+	 */
+	public function getPropertiesByName($name)
+	{
+		return Repositories::getChemicalPropertiesRepository()->getByName($name);
+	}
+
 }

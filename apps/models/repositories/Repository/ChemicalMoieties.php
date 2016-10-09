@@ -1,10 +1,9 @@
 <?php
 namespace Psychedex\Models\Repositories\Repository;
 
-use Phalcon\Http\Request;
-use Psychedex\Models\Entities\ChemicalFamily as Entity;
+use Psychedex\Models\Entities\ChemicalMoieties as Entity;
 
-class ChemicalFamily
+class ChemicalMoieties
 {
 
 	/**

@@ -4,9 +4,9 @@ namespace Psychedex\Modules\Api\Controllers;
 
 use Psychedex\Models\Services\Services;
 use Phalcon\Http\Response;
-use Psychedex\Models\Entities\ChemicalFamilies as Entity;
+use Psychedex\Models\Entities\ChemicalMoieties as Entity;
 
-class ChemicalfamilyController extends ControllerBase
+class ChemicalmoietyController extends ControllerBase
 {
 
 	/**
@@ -19,7 +19,7 @@ class ChemicalfamilyController extends ControllerBase
 		$errors = [];
 		$data = [];
 
-		$result = Services::getChemicalService()->getFamilies();
+		$result = Services::getChemicalService()->getMoieties();
 
 		if (!count($result))
 		{
@@ -61,7 +61,7 @@ class ChemicalfamilyController extends ControllerBase
 			$errors = [];
 			$data = [];
 
-			$result = Services::getChemicalService()->getFamiliesByName($ref);
+			$result = Services::getChemicalService()->getMoietiesByName($ref);
 
 			if (!count($result))
 			{
@@ -95,7 +95,7 @@ class ChemicalfamilyController extends ControllerBase
 			$errors = [];
 			$data = [];
 
-			$result = Services::getChemicalService()->getFamilyById($ref);
+			$result = Services::getChemicalService()->getMoietyById($ref);
 
 			if (!count($result))
 			{

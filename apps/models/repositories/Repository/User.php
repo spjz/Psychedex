@@ -1,13 +1,13 @@
 <?php
 namespace Psychedex\Models\Repositories\Repository;
 
-use Psychedex\Models\Entities\User as EntityUser;
+use Psychedex\Models\Entities\UserIndex as Entity;
 
-class User
+class UserIndex
 {
     public function getLast()
     {
-        return EntityUser::query()
+        return Entity::query()
             ->order('datetime DESC')
             ->execute();
     }
