@@ -36,7 +36,7 @@ All API responses are formatted as JSON object, comprising three arrays: `status
     [
         {
             "id":   "0",
-            "field: "value"
+            "field": "value"
         }
     ]
 }
