@@ -104,11 +104,11 @@ UNIQUE INDEX chemical_families_id_uindex ON chemical_families (id);
 UNIQUE INDEX chemical_families_name_uindex ON chemical_families (name);
 ```
 
-* `GET /api/chemical/family/list` - List all
-* `GET /api/chemical/family/search/{ref}` - Search by `id` or `name`
-* `POST /api/chemical/family/create` - Insert row
-* `PUT /api/chemical/family/update/{id}` - Update by `id`
-* `DELETE /api/chemical/family/delete/{id}` - Delete by `id`
+* `GET /api/a/chemical/family/list` - List all
+* `GET /api/a/chemical/family/search/{ref}` - Search by `id` or `name`
+* `POST /api/a/chemical/family/create` - Insert row
+* `PUT /api/a/chemical/family/update/{id}` - Update by `id`
+* `DELETE /api/a/chemical/family/delete/{id}` - Delete by `id`
 
 ##### Moieties
 ```sql
@@ -123,11 +123,11 @@ UNIQUE INDEX chemical_moieties_id_uindex ON chemical_moieties (id);
 UNIQUE INDEX chemical_moieties_name_uindex ON chemical_moieties (name);
 ````
 
-* `GET /api/chemical/moiety/list` - List all
-* `GET /api/chemical/moiety/search/{ref}` - Search by `id` or `name`
-* `POST /api/chemical/moiety/create` - Insert row
-* `PUT /api/chemical/moiety/update/{id}` - Update by `id`
-* `DELETE /api/chemical/moiety/delete/{id}` - Delete by `id`
+* `GET /api/a/chemical/moiety/list` - List all
+* `GET /api/a/chemical/moiety/search/{ref}` - Search by `id` or `name`
+* `POST /api/a/chemical/moiety/create` - Insert row
+* `PUT /api/a/chemical/moiety/update/{id}` - Update by `id`
+* `DELETE /api/a/chemical/moiety/delete/{id}` - Delete by `id`
 
 ##### Properties
 ```sql
@@ -141,11 +141,11 @@ UNIQUE INDEX chemical_properties_id_uindex ON chemical_properties (id);
 UNIQUE INDEX chemical_properties_name_uindex ON chemical_properties (name);
 ```
 
-* `GET /api/chemical/property/list` - List all
-* `GET /api/chemical/property/search/{ref}` - Search by `id` or `name`
-* `POST /api/chemical/property/create` - Insert row
-* `PUT /api/chemical/property/update/{id}` - Update by `id`
-* `DELETE /api/chemical/property/delete/{id}` - Delete by `id`
+* `GET /api/a/chemical/property/list` - List all
+* `GET /api/a/chemical/property/search/{ref}` - Search by `id` or `name`
+* `POST /api/a/chemical/property/create` - Insert row
+* `PUT /api/a/chemical/property/update/{id}` - Update by `id`
+* `DELETE /api/a/chemical/property/delete/{id}` - Delete by `id`
 
 #### Effect
 ##### Articles
@@ -163,7 +163,7 @@ INDEX effect_articles_effect_index_id_fk ON effect_articles (effect_index_id);
 UNIQUE INDEX effect_articles_id_uindex ON effect_articles (id);
 ```
 
-* `GET /api/effect/article/search/{effect_index_id}` - Search by `effect_index_id`
-* `POST /api/effect/article/create` - Insert row
-* `PUT /api/effect/article/update/{id}` - Update by `id`
-* `DELETE /api/effect/article/delete/{id}` - Delete by `id`
+* `GET /api/a/effect/article/search/{effect_index_id}` - Search by `effect_index_id`
+* `POST /api/a/effect/article/create` - Insert row
+* `PUT /api/a/effect/article/update/{id}` - Update by `id`
+* `DELETE /api/a/effect/article/delete/{id}` - Delete by `id`
