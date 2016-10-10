@@ -20,7 +20,7 @@ Read and write permission can be obtained by signing up as a developer and reque
 ### Response
 All API responses are formatted as JSON object, comprising three arrays: `status`, `errors`, `data`.
 
-```javascript
+```json
 {
     "status": {
         "code":    200,
@@ -36,10 +36,6 @@ All API responses are formatted as JSON object, comprising three arrays: `status
     [
         {
             "id":   "0",
-            "field: "value"
-        },
-        {
-            "id":   "1",
             "field: "value"
         }
     ]
