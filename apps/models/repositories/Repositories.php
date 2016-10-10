@@ -21,6 +21,8 @@ abstract class Repositories
 		return new $className();
 	}
 
+	// Chemical
+
 	/**
 	 * @return Repository\ChemicalFamilies
 	 */
@@ -45,6 +47,8 @@ abstract class Repositories
 		return new \Psychedex\Models\Repositories\Repository\ChemicalProperties();
 	}
 
+	// Effect
+
 	/**
 	 * @return Repository\EffectArticles
 	 */
@@ -52,5 +56,11 @@ abstract class Repositories
 	{
 		return new \Psychedex\Models\Repositories\Repository\EffectArticles();
 	}
+
+	// Todo: Experience
+	// ToDo: Molecule
+	// ToDo: Pharmacology
+	// ToDo: Taxonomy
+	// ToDo: User
 
 }

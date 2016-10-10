@@ -1,8 +1,22 @@
 # Psychedex
 * Version: a (_alpha_)
-* Author: [sPJz](io@spjz.uk)
+* Author: [sPJz](papaverjosepherum@gmail.com)
+
+Please contact me if you would like to contribute in any way! :)
+
+- [x] Database structure
+- [x] MVC framework
+- [ ] Public API
+- [ ] Effect interface
+- [ ] Substance interface
+- [ ] Report interface
+- [ ] Taxonomy interface
+- [ ] User interface
+- [ ] Graphic visualiser
+- [ ] Social platform
 
 ---
+
 ## Installation
 ### .\public
 * `npm install`
@@ -10,7 +24,6 @@
 
 ### MySQL
 * `mysql -u username -p < database.sql`
-
 
 ## API
 The public REST API allows developers to interact with the database. It has been developed with the intention of allowing third parties to develop client applications for any platform, using HTTP GET, POST, PUT, and DELETE requests to retrieve and submit data.
@@ -41,8 +54,6 @@ All API responses are formatted as JSON object, comprising three arrays: `status
     ]
 }
 ```
-
-
 
 ### Version
 Current API version is `a` for alpha.

@@ -6,7 +6,7 @@ use Psychedex\Models\Repositories\Repositories;
 class Chemical
 {
 
-	// Chemical Family
+	// Family
 
 	/**
 	 * @return mixed
@@ -34,7 +34,7 @@ class Chemical
 		return Repositories::getChemicalFamiliesRepository()->getByName($name);
 	}
 
-	// Chemical Moiety
+	// Moiety
 
 	/**
 	 * @return mixed
@@ -62,7 +62,7 @@ class Chemical
 		return Repositories::getChemicalMoietiesRepository()->getByName($name);
 	}
 
-	// Chemical Property
+	// Property
 
 	/**
 	 * @return mixed

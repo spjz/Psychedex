@@ -4,3 +4,4 @@ public/bower_components
 public/node_modules
 public/npm-debug.log
 public/css/*
+tests
