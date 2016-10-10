@@ -37,4 +37,52 @@ abstract class Services
 		return new \Psychedex\Models\Services\Service\Effect();
 	}
 
+	/**
+	 * @return Service\Experience
+	 */
+	public static function getExperienceService()
+	{
+		return new \Psychedex\Models\Services\Service\Experience();
+	}
+
+	/**
+	 * @return Service\Molecule
+	 */
+	public static function getMoleculeService()
+	{
+		return new \Psychedex\Models\Services\Service\Molecule();
+	}
+
+	/**
+	 * @return Service\Pharmacology
+	 */
+	public static function getPharmacologyService()
+	{
+		return new \Psychedex\Models\Services\Service\Pharmacology();
+	}
+
+	/**
+	 * @return Service\Substance
+	 */
+	public static function getSubstanceService()
+	{
+		return new \Psychedex\Models\Services\Service\Substance();
+	}
+
+	/**
+	 * @return Service\Taxonomy
+	 */
+	public static function getTaxonomyService()
+	{
+		return new \Psychedex\Models\Services\Service\Taxonomy();
+	}
+
+	/**
+	 * @return Service\User
+	 */
+	public static function getUserService()
+	{
+		return new \Psychedex\Models\Services\Service\User();
+	}
+
 }
