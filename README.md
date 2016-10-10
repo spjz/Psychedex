@@ -30,16 +30,14 @@ All API responses are formatted as JSON object, comprising three arrays: `status
     [
         "Invalid: field",
         "Missing: field",
-        "Conflict: field",
-        ..
+        "Conflict: field"
     ],
     "data":
     [
         {
             "id":   "0",
             "field: "value"
-        },
-        ..
+        }
     ]
 }
 ```
