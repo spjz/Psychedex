@@ -93,7 +93,7 @@ Routes follow a standardised format of /api/`version`/`service`/`repository`/`ac
 
 #### Chemical
 ##### Families
-```mysql
+```sql
 TABLE chemical_families
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -111,7 +111,7 @@ UNIQUE INDEX chemical_families_name_uindex ON chemical_families (name);
 * `DELETE /api/chemical/family/delete/{id}` - Delete by id
 
 ##### Moieties
-```mysql
+```sql
 TABLE chemical_moieties
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -130,7 +130,7 @@ UNIQUE INDEX chemical_moieties_name_uindex ON chemical_moieties (name);
 * `DELETE /api/chemical/moiety/delete/{id}` - Delete by id
 
 ##### Properties
-```javascript
+```sql
 TABLE chemical_properties
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -149,7 +149,7 @@ UNIQUE INDEX chemical_properties_name_uindex ON chemical_properties (name);
 
 #### Effect
 ##### Articles
-```javascript
+```sql
 TABLE effect_articles
 (
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
