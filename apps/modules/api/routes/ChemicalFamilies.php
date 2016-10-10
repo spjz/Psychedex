@@ -16,7 +16,7 @@ class ChemicalFamilies extends RouterGroup
 			]
 		);
 
-		$this->setPrefix('/api/chemical/family');
+		$this->setPrefix('/api/' . APIVERSION . '/chemical/family');
 
 		$this->addGet(
 			"/list",

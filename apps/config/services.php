@@ -11,6 +11,11 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Psychedex\Modules\Api\Routes as ApiRoutes;
 
 /**
+ * Set current API version
+ */
+define('APIVERSION', 'a');
+
+/**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
 $di = new FactoryDefault();
@@ -43,7 +48,8 @@ $di->set('router', function () {
 	$router
 		->mount(new ApiRoutes\ChemicalFamilies())
 		->mount(new ApiRoutes\ChemicalMoieties())
-		->mount(new ApiRoutes\ChemicalProperties());
+		->mount(new ApiRoutes\ChemicalProperties())
+		->mount(new ApiRoutes\EffectArticles());
 
 	return $router;
 });

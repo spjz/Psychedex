@@ -4,22 +4,22 @@ namespace Psychedex\Modules\Api\Controllers;
 
 use Psychedex\Models\Services\Services;
 use Phalcon\Http\Response;
-use Psychedex\Models\Entities\ChemicalProperties as Entity;
+use Psychedex\Models\Entities\EffectArticles as Entity;
 
-class ChemicalpropertiesController extends ControllerBase
+class EffectarticlesController extends ControllerBase
 {
 
 	/**
-	 * List all
+	 * Search by effect_index_id
 	 *
 	 * @return Response $response
 	 */
-	public function listAction()
+	public function searchAction($effect_index_id)
 	{
 		$errors = [];
 		$data = [];
 
-		$result = Services::getChemicalService()->getProperties();
+		$result = Services::getEffectService()->getByEffectIndexId();
 
 		if (!count($result))
 		{
@@ -39,90 +39,15 @@ class ChemicalpropertiesController extends ControllerBase
 			{
 				$data[] = [
 					"id" => $row->id,
-					"name" => $row->name,
-					"image" => $row->image,
+					"effect_index_id" => $row->effect_index_id,
+					"body" => $row->body,
+					"timestamp_created" => $row->timestamp_created,
+					"timestamp_modified" => $row->timestamp_modified,
 				];
 			}
 		}
 
 		return $this->respond($status, $errors, $data);
-	}
-
-	/**
-	 * Search by $ref
-	 *
-	 * @param int|string $ref
-	 * @return Response $response
-	 */
-	public function searchAction($ref)
-	{
-		if (!is_numeric($ref))
-		{
-			$errors = [];
-			$data = [];
-
-			$result = Services::getChemicalService()->getPropertiesByName($ref);
-
-			if (!count($result))
-			{
-				$status = [
-					"code" => 200,
-					"message" => "OK",
-				];
-				$errors[] = "No results";
-			}
-			else
-			{
-				$status = [
-					"code" => 200,
-					"message" => "OK",
-				];
-				foreach ($result as $row)
-				{
-					$data[] = [
-						"id" => $row->id,
-						"name" => $row->name,
-						"image" => $row->image,
-					];
-				}
-			}
-
-			return $this->respond($status, $errors, $data);
-		}
-		else
-		{
-
-			$errors = [];
-			$data = [];
-
-			$result = Services::getChemicalService()->getPropertyById($ref);
-
-			if (!count($result))
-			{
-				$status = [
-					"code" => 200,
-					"message" => "OK",
-				];
-				$errors[] = "No results";
-			}
-			else
-			{
-				$status = [
-					"code" => 200,
-					"message" => "OK",
-				];
-				foreach ($result as $row)
-				{
-					$data[] = [
-						"id" => $row->id,
-						"name" => $row->name,
-						"image" => $row->image,
-					];
-				}
-			}
-
-			return $this->respond($status, $errors, $data);
-		}
 	}
 
 	/**

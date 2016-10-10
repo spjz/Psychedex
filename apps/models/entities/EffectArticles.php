@@ -2,6 +2,8 @@
 
 namespace Psychedex\Models\Entities;
 
+use Phalcon\Validation;
+
 class EffectArticles extends \Phalcon\Mvc\Model
 {
 
@@ -24,16 +26,23 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", length=256, nullable=false)
+	 * @Column(type="string", nullable=false)
 	 */
-	protected $title;
+	protected $body;
 
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", nullable=false)
+	 * @Column(type="datetime", nullable=false)
 	 */
-	protected $body;
+	protected $timestamp_created;
+
+	/**
+	 *
+	 * @var string
+	 * @Column(type="datetime", nullable=false)
+	 */
+	protected $timestamp_modified;
 
 	/**
 	 * Method to set the value of field id
@@ -62,19 +71,6 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Method to set the value of field title
-	 *
-	 * @param string $title
-	 * @return $this
-	 */
-	public function setTitle($title)
-	{
-		$this->title = $title;
-
-		return $this;
-	}
-
-	/**
 	 * Method to set the value of field body
 	 *
 	 * @param string $body
@@ -83,6 +79,32 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	public function setBody($body)
 	{
 		$this->body = $body;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field timestamp_created
+	 *
+	 * @param string $timestamp_created
+	 * @return $this
+	 */
+	public function setTimestampCreated($timestamp_created)
+	{
+		$this->timestamp_created = $timestamp_created;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field timestamp_created
+	 *
+	 * @param string $timestamp_modified
+	 * @return $this
+	 */
+	public function setTimestampModified($timestamp_modified)
+	{
+		$this->timestamp_modified = $timestamp_modified;
 
 		return $this;
 	}
@@ -108,16 +130,6 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Returns the value of field title
-	 *
-	 * @return string
-	 */
-	public function getTitle()
-	{
-		return $this->title;
-	}
-
-	/**
 	 * Returns the value of field body
 	 *
 	 * @return string
@@ -125,6 +137,26 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	public function getBody()
 	{
 		return $this->body;
+	}
+
+	/**
+	 * Returns the value of field timestamp_created
+	 *
+	 * @return string
+	 */
+	public function getTimestampCreated()
+	{
+		return $this->timestamp_created;
+	}
+
+	/**
+	 * Returns the value of field timestamp_modified
+	 *
+	 * @return string
+	 */
+	public function getTimestampModified()
+	{
+		return $this->timestamp_modified;
 	}
 
 	/**
@@ -138,6 +170,28 @@ class EffectArticles extends \Phalcon\Mvc\Model
 			'id',
 			['alias' => 'EffectIndex']
 		);
+	}
+
+	/**
+	 * Validations and business logic
+	 */
+	public function validation()
+	{
+		$validation = new Validation();
+		$validation
+			->setDefaultMessages(
+				[
+					"PresenceOf" => "Missing: :field",
+					"Uniqueness" => "Conflict: :field",
+				]
+			);
+		$validation
+			->add(['effect_index_id', 'body', 'timestamp_created', 'timestamp_modified'],
+			      new Validation\Validator\PresenceOf())
+			->add('effect_index_id',
+						new Validation\Validator\Uniqueness()
+			);
+		return $this->validate($validation);
 	}
 
 	/**
@@ -178,13 +232,14 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	 *
 	 * @return array
 	 */
-	public function columnMap()
+	public static function columnMap()
 	{
 		return [
 			'id' => 'id',
 			'effect_index_id' => 'effect_index_id',
-			'title' => 'title',
-			'body' => 'body'
+			'body' => 'body',
+			'timestamp_Created' => 'timestamp_Created',
+			'timestamp_modified' => 'timestamp_modified',
 		];
 	}
 

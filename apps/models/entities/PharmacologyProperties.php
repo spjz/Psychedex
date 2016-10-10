@@ -148,7 +148,7 @@ class PharmacologyProperties extends \Phalcon\Mvc\Model
 	 *
 	 * @return array
 	 */
-	public function columnMap()
+	public static function columnMap()
 	{
 		return [
 			'id' => 'id',

@@ -4,7 +4,7 @@ namespace Psychedex\Modules\Api\Routes;
 
 use Phalcon\Mvc\Router\Group as RouterGroup;
 
-class ChemicalProperties extends RouterGroup
+class EffectArticles extends RouterGroup
 {
 	public function initialize()
 	{
@@ -12,18 +12,14 @@ class ChemicalProperties extends RouterGroup
 			[
 				'namespace' => 'Psychedex\Modules\Api\Controllers',
 				'module' => 'api',
-				'controller' => 'chemicalproperties',
+				'controller' => 'effectarticles',
 			]
 		);
 
-		$this->setPrefix('/api/' . APIVERSION . '/chemical/property');
+		$this->setPrefix('/api/' . APIVERSION . '/effect/article');
 
 		$this->addGet(
-			"/list",
-			['action' => 'list']
-		);
-		$this->addGet(
-			"/search/{ref}",
+			"/search/{effect_index_id}",
 			['action' => 'search']
 		);
 

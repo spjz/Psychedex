@@ -126,7 +126,7 @@ class ChemicalmoietiesController extends ControllerBase
 	}
 
 	/**
-	 * Insert new row
+	 * Insert row
 	 *
 	 * @return Response $response
 	 */

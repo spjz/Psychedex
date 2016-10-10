@@ -16,7 +16,7 @@ class ChemicalMoieties extends RouterGroup
 			]
 		);
 
-		$this->setPrefix('/api/chemical/moiety');
+		$this->setPrefix('/api/' . APIVERSION . '/chemical/moiety');
 
 		$this->addGet(
 			"/list",

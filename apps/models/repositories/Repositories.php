@@ -45,4 +45,12 @@ abstract class Repositories
 		return new \Psychedex\Models\Repositories\Repository\ChemicalProperties();
 	}
 
+	/**
+	 * @return Repository\EffectArticles
+	 */
+	public static function getEffectArticlesRepository()
+	{
+		return new \Psychedex\Models\Repositories\Repository\EffectArticles();
+	}
+
 }

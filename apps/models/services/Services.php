@@ -28,4 +28,13 @@ abstract class Services
 	{
 		return new \Psychedex\Models\Services\Service\Chemical();
 	}
+
+	/**
+	 * @return Service\Effect
+	 */
+	public static function getEffectService()
+	{
+		return new \Psychedex\Models\Services\Service\Effect();
+	}
+
 }
