@@ -105,14 +105,9 @@ Routes follow a standardised format of /api/`version`/`service`/`repository`/`ac
 #### Chemical
 ##### Families
 ```sql
-TABLE chemical_families
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(64) NOT NULL,
-    image VARCHAR(256)
-);
-UNIQUE INDEX chemical_families_id_uindex ON chemical_families (id);
-UNIQUE INDEX chemical_families_name_uindex ON chemical_families (name);
+id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+file_index_id INT(11),
+name VARCHAR(64) NOT NULL,
 ```
 
 * `GET /api/a/chemical/family/list` - List all
@@ -123,15 +118,10 @@ UNIQUE INDEX chemical_families_name_uindex ON chemical_families (name);
 
 ##### Moieties
 ```sql
-TABLE chemical_moieties
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(64) NOT NULL,
-    formula VARCHAR(64) NOT NULL,
-    image VARCHAR(256)
-);
-UNIQUE INDEX chemical_moieties_id_uindex ON chemical_moieties (id);
-UNIQUE INDEX chemical_moieties_name_uindex ON chemical_moieties (name);
+id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+file_index_id INT(11),
+name VARCHAR(64) NOT NULL,
+formula VARCHAR(64) NOT NULL,
 ````
 
 * `GET /api/a/chemical/moiety/list` - List all
@@ -142,14 +132,9 @@ UNIQUE INDEX chemical_moieties_name_uindex ON chemical_moieties (name);
 
 ##### Properties
 ```sql
-TABLE chemical_properties
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name VARCHAR(64) NOT NULL,
-    unit VARCHAR(64) NOT NULL
-);
-UNIQUE INDEX chemical_properties_id_uindex ON chemical_properties (id);
-UNIQUE INDEX chemical_properties_name_uindex ON chemical_properties (name);
+id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+name VARCHAR(64) NOT NULL,
+unit VARCHAR(64) NOT NULL
 ```
 
 * `GET /api/a/chemical/property/list` - List all
@@ -161,17 +146,14 @@ UNIQUE INDEX chemical_properties_name_uindex ON chemical_properties (name);
 #### Effect
 ##### Articles
 ```sql
-TABLE effect_articles
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    effect_index_id INT(11) NOT NULL,
-    body TEXT NOT NULL,
-    timestamp_created DATETIME NOT NULL,
-    timestamp_modified DATETIME NOT NULL,
-    CONSTRAINT effect_articles_effect_index_id_fk FOREIGN KEY (effect_index_id) REFERENCES effect_index (id)
-);
-INDEX effect_articles_effect_index_id_fk ON effect_articles (effect_index_id);
-UNIQUE INDEX effect_articles_id_uindex ON effect_articles (id);
+id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+effect_index_id INT(11) NOT NULL,
+title VARCHAR(256) NOT NULL,
+body TEXT NOT NULL,
+timestamp_created DATETIME NOT NULL,
+timestamp_modified DATETIME NOT NULL,
+user_index_id_created INT(11) NOT NULL,
+user_index_id_modified INT(11) NOT NULL,
 ```
 
 * `GET /api/a/effect/article/search/{effect_index_id}` - Search by `effect_index_id`
