@@ -46,14 +46,20 @@ $di->set('router', function () {
 	$router->removeExtraSlashes(true);
 
 	$router
+		//->mount(new ApiRoutes\AchievementIndex())
+
 		->mount(new ApiRoutes\ChemicalFamilies())
 		->mount(new ApiRoutes\ChemicalMoieties())
 		->mount(new ApiRoutes\ChemicalProperties())
+
+		//->mount(new ApiRoutes\EffectArticleAttachments())
+		//->mount(new ApiRoutes\EffectArticleReferences())
 		->mount(new ApiRoutes\EffectArticles())
 		//->mount(new ApiRoutes\EffectClasses())
 		//->mount(new ApiRoutes\EffectDomains())
 		//->mount(new ApiRoutes\EffectIndex())
 		//->mount(new ApiRoutes\EffectTransformations())
+
 		//->mount(new ApiRoutes\ExperienceComments())
 		//->mount(new ApiRoutes\ExperienceEffects())
 		//->mount(new ApiRoutes\ExperienceIndex())
@@ -63,6 +69,9 @@ $di->set('router', function () {
 		//->mount(new ApiRoutes\ExperienceSubstances())
 		//->mount(new ApiRoutes\ExperienceTags())
 		//->mount(new ApiRoutes\ExperienceVisibility())
+
+		//->mount(new ApiRoutes\FileIndex())
+
 		//->mount(new ApiRoutes\MoleculeChemicalFamilies())
 		//->mount(new ApiRoutes\MoleculeChemicalMoieties())
 		//->mount(new ApiRoutes\MoleculeChemicalProperties())
@@ -70,23 +79,27 @@ $di->set('router', function () {
 		//->mount(new ApiRoutes\MoleculePharmacologyActivity())
 		//->mount(new ApiRoutes\MoleculePharmacologyLigands())
 		//->mount(new ApiRoutes\MoleculePharmacologyProperties())
-		//->mount(new ApiRoutes\MoleculePharmacology())
-		//->mount(new ApiRoutes\MoleculePharmacology())
+
 		//->mount(new ApiRoutes\PharmacologyActivity())
 		//->mount(new ApiRoutes\PharmacologyNeurotransmitters())
 		//->mount(new ApiRoutes\PharmacologyProperties())
 		//->mount(new ApiRoutes\PharmacologyReceptors())
 		//->mount(new ApiRoutes\PharmacologyRoutes())
+
+		//->mount(new ApiRoutes\SubstanceArticleAttachments())
+		//->mount(new ApiRoutes\SubstanceArticleReferences())
 		//->mount(new ApiRoutes\SubstanceArticles())
 		//->mount(new ApiRoutes\SubstanceConstituents())
 		//->mount(new ApiRoutes\SubstanceIdentifiers())
 		//->mount(new ApiRoutes\SubstanceIndex())
 		//->mount(new ApiRoutes\SubstanceSources())
+
 		//->mount(new ApiRoutes\TaxonomyConstituents())
 		//->mount(new ApiRoutes\TaxonomyIdentifiers())
 		//->mount(new ApiRoutes\TaxonomyIndex())
 		//->mount(new ApiRoutes\TaxonomyOrgans())
 		//->mount(new ApiRoutes\TaxonomyRanks())
+
 		//->mount(new ApiRoutes\UserAchievements())
 		//->mount(new ApiRoutes\UserGroups())
 		//->mount(new ApiRoutes\UserIndex())

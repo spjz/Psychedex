@@ -22,6 +22,14 @@ abstract class Services
 	}
 
 	/**
+	 * @return Service\Achievement
+	 */
+	public static function getAchievementService()
+	{
+		return new \Psychedex\Models\Services\Service\Achievement();
+	}
+
+	/**
 	 * @return Service\Chemical
 	 */
 	public static function getChemicalService()
@@ -43,6 +51,14 @@ abstract class Services
 	public static function getExperienceService()
 	{
 		return new \Psychedex\Models\Services\Service\Experience();
+	}
+
+	/**
+	 * @return Service\File
+	 */
+	public static function getFileService()
+	{
+		return new \Psychedex\Models\Services\Service\File();
 	}
 
 	/**

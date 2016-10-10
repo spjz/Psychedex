@@ -4,7 +4,7 @@ namespace Psychedex\Models\Entities;
 
 use Phalcon\Validation;
 
-class ChemicalMoieties extends \Phalcon\Mvc\Model
+class EffectArticleReferences extends \Phalcon\Mvc\Model
 {
 
 	/**
@@ -19,23 +19,30 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	/**
 	 *
 	 * @var integer
-	 * @Column(type="integer", length=11, nullable=true)
+	 * @Column(type="integer", length=11, nullable=false)
 	 */
-	protected $file_index_id;
+	protected $effect_article_id;
 
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", length=64, nullable=false)
+	 * @Column(type="string", length=512, nullable=true)
 	 */
-	protected $name;
+	protected $url;
 
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", length=64, nullable=false)
+	 * @Column(type="string", length=256, nullable=false)
 	 */
-	protected $formula;
+	protected $title;
+
+	/**
+	 *
+	 * @var integer
+	 * @Column(type="integer", length=11, nullable=false)
+	 */
+	protected $position;
 
 	/**
 	 * Method to set the value of field id
@@ -51,40 +58,53 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Method to set the value of field file_index_id
+	 * Method to set the value of field effect_article_id
 	 *
-	 * @param integer $file_index_id
+	 * @param integer $effect_article_id
 	 * @return $this
 	 */
-	public function setFileIndexId($file_index_id)
+	public function setEffectArticleId($effect_article_id)
 	{
-		$this->file_index_id = $file_index_id;
+		$this->effect_article_id = $effect_article_id;
 
 		return $this;
 	}
 
 	/**
-	 * Method to set the value of field name
+	 * Method to set the value of field url
 	 *
-	 * @param string $name
+	 * @param string $url
 	 * @return $this
 	 */
-	public function setName($name)
+	public function setUrl($url)
 	{
-		$this->name = $name;
+		$this->url = $url;
 
 		return $this;
 	}
 
 	/**
-	 * Method to set the value of field formula
+	 * Method to set the value of field title
 	 *
-	 * @param string $formula
+	 * @param string $title
 	 * @return $this
 	 */
-	public function setFormula($formula)
+	public function setTitle($title)
 	{
-		$this->formula = $formula;
+		$this->title = $title;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field position
+	 *
+	 * @param integer $position
+	 * @return $this
+	 */
+	public function setPosition($position)
+	{
+		$this->position = $position;
 
 		return $this;
 	}
@@ -100,33 +120,43 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Returns the value of field file_index_id
+	 * Returns the value of field effect_article_id
 	 *
 	 * @return integer
 	 */
-	public function getFileIndexId()
+	public function getEffectArticleId()
 	{
-		return $this->file_index_id;
+		return $this->effect_article_id;
 	}
 
 	/**
-	 * Returns the value of field name
+	 * Returns the value of field url
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getUrl()
 	{
-		return $this->name;
+		return $this->url;
 	}
 
 	/**
-	 * Returns the value of field formula
+	 * Returns the value of field title
 	 *
 	 * @return string
 	 */
-	public function getFormula()
+	public function getTitle()
 	{
-		return $this->formula;
+		return $this->title;
+	}
+
+	/**
+	 * Returns the value of field position
+	 *
+	 * @return integer
+	 */
+	public function getPosition()
+	{
+		return $this->position;
 	}
 
 	/**
@@ -134,8 +164,7 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 */
 	public function initialize()
 	{
-		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalMoieties', 'chemical_moiety_id', ['alias' => 'MoleculeChemicalMoieties']);
-		$this->belongsTo('file_index_id', 'Psychedex\Models\Entities\FileIndex', 'id', ['alias' => 'FileIndex']);
+		$this->belongsTo('effect_article_id', 'Psychedex\Models\Entities\EffectArticles', 'id', ['alias' => 'EffectArticles']);
 	}
 
 	/**
@@ -148,28 +177,23 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 		$validation->setDefaultMessages(
 			[
 				'PresenceOf'   => 'Missing: :field',
-				'Uniqueness'   => 'Conflict: :field',
 				'Numericality' => 'Invalid: :field',
 			]
 		);
 		$validation->add(
 			[
-				'name',
-				'formula',
+				'effect_article_id',
+				'url',
+				'title',
+				'position',
 			],
 			new Validation\Validator\PresenceOf()
 		);
 
 		$validation->add(
 			[
-				'name',
-			],
-			new Validation\Validator\Uniqueness()
-		);
-
-		$validation->add(
-			[
-				'file_index_id',
+				'effect_article_id',
+				'position',
 			],
 			new Validation\Validator\Numericality()
 		);
@@ -184,14 +208,14 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 */
 	public function getSource()
 	{
-		return 'chemical_moieties';
+		return 'effect_article_references';
 	}
 
 	/**
 	 * Allows to query a set of records that match the specified conditions
 	 *
 	 * @param mixed $parameters
-	 * @return ChemicalMoieties[]
+	 * @return EffectArticleReferences[]
 	 */
 	public static function find($parameters = null)
 	{
@@ -202,7 +226,7 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 * Allows to query the first record that match the specified conditions
 	 *
 	 * @param mixed $parameters
-	 * @return ChemicalMoieties
+	 * @return EffectArticleReferences
 	 */
 	public static function findFirst($parameters = null)
 	{
@@ -219,9 +243,10 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	{
 		return [
 			'id' => 'id',
-			'file_index_id' => 'file_index_id',
-			'name' => 'name',
-			'formula' => 'formula'
+			'effect_article_id' => 'effect_article_id',
+			'url' => 'url',
+			'title' => 'title',
+			'position' => 'position'
 		];
 	}
 

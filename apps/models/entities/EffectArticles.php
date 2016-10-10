@@ -26,6 +26,13 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	/**
 	 *
 	 * @var string
+	 * @Column(type="string", length=256, nullable=false)
+	 */
+	protected $title;
+
+	/**
+	 *
+	 * @var string
 	 * @Column(type="string", nullable=false)
 	 */
 	protected $body;
@@ -33,16 +40,30 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	/**
 	 *
 	 * @var string
-	 * @Column(type="datetime", nullable=false)
+	 * @Column(type="string", nullable=false)
 	 */
 	protected $timestamp_created;
 
 	/**
 	 *
 	 * @var string
-	 * @Column(type="datetime", nullable=false)
+	 * @Column(type="string", nullable=false)
 	 */
 	protected $timestamp_modified;
+
+	/**
+	 *
+	 * @var integer
+	 * @Column(type="integer", length=11, nullable=false)
+	 */
+	protected $user_index_id_created;
+
+	/**
+	 *
+	 * @var integer
+	 * @Column(type="integer", length=11, nullable=false)
+	 */
+	protected $user_index_id_modified;
 
 	/**
 	 * Method to set the value of field id
@@ -66,6 +87,19 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	public function setEffectIndexId($effect_index_id)
 	{
 		$this->effect_index_id = $effect_index_id;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field title
+	 *
+	 * @param string $title
+	 * @return $this
+	 */
+	public function setTitle($title)
+	{
+		$this->title = $title;
 
 		return $this;
 	}
@@ -97,7 +131,7 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Method to set the value of field timestamp_created
+	 * Method to set the value of field timestamp_modified
 	 *
 	 * @param string $timestamp_modified
 	 * @return $this
@@ -105,6 +139,32 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	public function setTimestampModified($timestamp_modified)
 	{
 		$this->timestamp_modified = $timestamp_modified;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field user_index_id_created
+	 *
+	 * @param integer $user_index_id_created
+	 * @return $this
+	 */
+	public function setUserIndexIdCreated($user_index_id_created)
+	{
+		$this->user_index_id_created = $user_index_id_created;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field user_index_id_modified
+	 *
+	 * @param integer $user_index_id_modified
+	 * @return $this
+	 */
+	public function setUserIndexIdModified($user_index_id_modified)
+	{
+		$this->user_index_id_modified = $user_index_id_modified;
 
 		return $this;
 	}
@@ -127,6 +187,16 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	public function getEffectIndexId()
 	{
 		return $this->effect_index_id;
+	}
+
+	/**
+	 * Returns the value of field title
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
 	}
 
 	/**
@@ -160,16 +230,35 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	}
 
 	/**
+	 * Returns the value of field user_index_id_created
+	 *
+	 * @return integer
+	 */
+	public function getUserIndexIdCreated()
+	{
+		return $this->user_index_id_created;
+	}
+
+	/**
+	 * Returns the value of field user_index_id_modified
+	 *
+	 * @return integer
+	 */
+	public function getUserIndexIdModified()
+	{
+		return $this->user_index_id_modified;
+	}
+
+	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()
 	{
-		$this->belongsTo(
-			'effect_index_id',
-			'Psychedex\Models\Entities\EffectIndex',
-			'id',
-			['alias' => 'EffectIndex']
-		);
+		$this->hasMany('id', 'Psychedex\Models\Entities\EffectArticleAttachments', 'effect_article_id', ['alias' => 'EffectArticleAttachments']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\EffectArticleReferences', 'effect_article_id', ['alias' => 'EffectArticleReferences']);
+		$this->belongsTo('user_index_id_created', 'Psychedex\Models\Entities\UserIndex', 'id', ['alias' => 'UserIndex']);
+		$this->belongsTo('effect_index_id', 'Psychedex\Models\Entities\EffectIndex', 'id', ['alias' => 'EffectIndex']);
+		$this->belongsTo('user_index_id_modified', 'Psychedex\Models\Entities\UserIndex', 'id', ['alias' => 'UserIndex']);
 	}
 
 	/**
@@ -178,19 +267,35 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	public function validation()
 	{
 		$validation = new Validation();
-		$validation
-			->setDefaultMessages(
-				[
-					"PresenceOf" => "Missing: :field",
-					"Uniqueness" => "Conflict: :field",
-				]
-			);
-		$validation
-			->add(['effect_index_id', 'body', 'timestamp_created', 'timestamp_modified'],
-			      new Validation\Validator\PresenceOf())
-			->add('effect_index_id',
-						new Validation\Validator\Uniqueness()
-			);
+
+		$validation->setDefaultMessages(
+			[
+				'PresenceOf'   => 'Missing: :field',
+				'Uniqueness'   => 'Conflict: :field',
+				'Numericality' => 'Invalid: :field',
+			]
+		);
+		$validation->add(
+			[
+				'effect_index_id',
+				'title',
+				'body',
+				'timestamp_created',
+				'timestamp_modified',
+				'user_index_id_created',
+				'user_index_id_modified',
+			],
+			new Validation\Validator\PresenceOf()
+		);
+
+		$validation->add(
+			[
+				'effect_index_id',
+				'user_index_id_created',
+				'user_index_id_modified',			],
+			new Validation\Validator\Numericality()
+		);
+
 		return $this->validate($validation);
 	}
 
@@ -232,14 +337,17 @@ class EffectArticles extends \Phalcon\Mvc\Model
 	 *
 	 * @return array
 	 */
-	public static function columnMap()
+	public function columnMap()
 	{
 		return [
 			'id' => 'id',
 			'effect_index_id' => 'effect_index_id',
+			'title' => 'title',
 			'body' => 'body',
-			'timestamp_Created' => 'timestamp_Created',
+			'timestamp_created' => 'timestamp_created',
 			'timestamp_modified' => 'timestamp_modified',
+			'user_index_id_created' => 'user_index_id_created',
+			'user_index_id_modified' => 'user_index_id_modified'
 		];
 	}
 

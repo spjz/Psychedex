@@ -104,12 +104,7 @@ class ChemicalProperties extends \Phalcon\Mvc\Model
 	 */
 	public function initialize()
 	{
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\MoleculeChemicalProperties',
-			'chemical_property_id',
-			['alias' => 'MoleculeChemicalProperties']
-		);
+		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalProperties', 'chemical_property_id', ['alias' => 'MoleculeChemicalProperties']);
 	}
 
 	/**
@@ -118,19 +113,29 @@ class ChemicalProperties extends \Phalcon\Mvc\Model
 	public function validation()
 	{
 		$validation = new Validation();
-		$validation
-			->setDefaultMessages(
-				[
-					"PresenceOf" => "Missing: :field",
-					"Uniqueness" => "Conflict: :field",
-				]
-			);
-		$validation
-			->add(['name', 'unit'], new Validation\Validator\PresenceOf())
-			->add(
+
+		$validation->setDefaultMessages(
+			[
+				'PresenceOf'   => 'Missing: :field',
+				'Uniqueness'   => 'Conflict: :field',
+				'Numericality' => 'Invalid: :field',
+			]
+		);
+		$validation->add(
+			[
 				'name',
-				new Validation\Validator\Uniqueness()
-			);
+				'unit',
+			],
+			new Validation\Validator\PresenceOf()
+		);
+
+		$validation->add(
+			[
+				'name',
+			],
+			new Validation\Validator\Uniqueness()
+		);
+
 		return $this->validate($validation);
 	}
 
@@ -172,7 +177,7 @@ class ChemicalProperties extends \Phalcon\Mvc\Model
 	 *
 	 * @return array
 	 */
-	public static function columnMap()
+	public function columnMap()
 	{
 		return [
 			'id' => 'id',

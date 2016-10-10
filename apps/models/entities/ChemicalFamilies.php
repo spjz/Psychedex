@@ -18,17 +18,17 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 
 	/**
 	 *
-	 * @var string
-	 * @Column(type="string", length=64, nullable=false)
+	 * @var integer
+	 * @Column(type="integer", length=11, nullable=true)
 	 */
-	protected $name;
+	protected $file_index_id;
 
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", length=256, nullable=true)
+	 * @Column(type="string", length=64, nullable=false)
 	 */
-	protected $image;
+	protected $name;
 
 	/**
 	 * Method to set the value of field id
@@ -39,6 +39,19 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	public function setId($id)
 	{
 		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field file_index_id
+	 *
+	 * @param integer $file_index_id
+	 * @return $this
+	 */
+	public function setFileIndexId($file_index_id)
+	{
+		$this->file_index_id = $file_index_id;
 
 		return $this;
 	}
@@ -57,19 +70,6 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Method to set the value of field image
-	 *
-	 * @param string $image
-	 * @return $this
-	 */
-	public function setImage($image)
-	{
-		$this->image = $image;
-
-		return $this;
-	}
-
-	/**
 	 * Returns the value of field id
 	 *
 	 * @return integer
@@ -77,6 +77,16 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	/**
+	 * Returns the value of field file_index_id
+	 *
+	 * @return integer
+	 */
+	public function getFileIndexId()
+	{
+		return $this->file_index_id;
 	}
 
 	/**
@@ -90,26 +100,12 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Returns the value of field image
-	 *
-	 * @return string
-	 */
-	public function getImage()
-	{
-		return $this->image;
-	}
-
-	/**
 	 * Initialize method for model.
 	 */
 	public function initialize()
 	{
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\MoleculeChemicalFamilies',
-			'chemical_family_id',
-			['alias' => 'MoleculeChemicalFamilies']
-		);
+		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalFamilies', 'chemical_family_id', ['alias' => 'MoleculeChemicalFamilies']);
+		$this->belongsTo('file_index_id', 'Psychedex\Models\Entities\FileIndex', 'id', ['alias' => 'FileIndex']);
 	}
 
 	/**
@@ -118,19 +114,35 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	public function validation()
 	{
 		$validation = new Validation();
-		$validation
-			->setDefaultMessages(
-				[
-					"PresenceOf" => "Missing: :field",
-					"Uniqueness" => "Conflict: :field",
-				]
-			);
-		$validation
-			->add('name', new Validation\Validator\PresenceOf())
-			->add(
+
+		$validation->setDefaultMessages(
+			[
+				'PresenceOf'   => 'Missing: :field',
+				'Uniqueness'   => 'Conflict: :field',
+				'Numericality' => 'Invalid: :field',
+			]
+		);
+		$validation->add(
+			[
 				'name',
-				new Validation\Validator\Uniqueness()
-			);
+			],
+			new Validation\Validator\PresenceOf()
+		);
+
+		$validation->add(
+			[
+				'file_index_id',
+				'name',
+			],
+			new Validation\Validator\Uniqueness()
+		);
+
+		$validation->add(
+			[
+				'file_index_id',
+			],
+			new Validation\Validator\Numericality()
+		);
 
 		return $this->validate($validation);
 	}
@@ -173,12 +185,12 @@ class ChemicalFamilies extends \Phalcon\Mvc\Model
 	 *
 	 * @return array
 	 */
-	public static function columnMap()
+	public function columnMap()
 	{
 		return [
 			'id' => 'id',
-			'name' => 'name',
-			'image' => 'image'
+			'file_index_id' => 'file_index_id',
+			'name' => 'name'
 		];
 	}
 

@@ -4,7 +4,7 @@ namespace Psychedex\Models\Entities;
 
 use Phalcon\Validation;
 
-class ChemicalMoieties extends \Phalcon\Mvc\Model
+class AchievementIndex extends \Phalcon\Mvc\Model
 {
 
 	/**
@@ -26,16 +26,16 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", length=64, nullable=false)
+	 * @Column(type="string", length=256, nullable=false)
 	 */
 	protected $name;
 
 	/**
 	 *
 	 * @var string
-	 * @Column(type="string", length=64, nullable=false)
+	 * @Column(type="string", nullable=false)
 	 */
-	protected $formula;
+	protected $description;
 
 	/**
 	 * Method to set the value of field id
@@ -77,14 +77,14 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Method to set the value of field formula
+	 * Method to set the value of field description
 	 *
-	 * @param string $formula
+	 * @param string $description
 	 * @return $this
 	 */
-	public function setFormula($formula)
+	public function setDescription($description)
 	{
-		$this->formula = $formula;
+		$this->description = $description;
 
 		return $this;
 	}
@@ -120,13 +120,13 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	}
 
 	/**
-	 * Returns the value of field formula
+	 * Returns the value of field description
 	 *
 	 * @return string
 	 */
-	public function getFormula()
+	public function getDescription()
 	{
-		return $this->formula;
+		return $this->description;
 	}
 
 	/**
@@ -134,7 +134,7 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 */
 	public function initialize()
 	{
-		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeChemicalMoieties', 'chemical_moiety_id', ['alias' => 'MoleculeChemicalMoieties']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserAchievements', 'achievement_index_id', ['alias' => 'UserAchievements']);
 		$this->belongsTo('file_index_id', 'Psychedex\Models\Entities\FileIndex', 'id', ['alias' => 'FileIndex']);
 	}
 
@@ -149,19 +149,20 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 			[
 				'PresenceOf'   => 'Missing: :field',
 				'Uniqueness'   => 'Conflict: :field',
-				'Numericality' => 'Invalid: :field',
+			  'Numericality' => 'Invalid: :field',
 			]
 		);
 		$validation->add(
 			[
 				'name',
-				'formula',
+				'description',
 			],
 			new Validation\Validator\PresenceOf()
 		);
 
 		$validation->add(
 			[
+				'file_index_id',
 				'name',
 			],
 			new Validation\Validator\Uniqueness()
@@ -184,14 +185,14 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 */
 	public function getSource()
 	{
-		return 'chemical_moieties';
+		return 'achievement_index';
 	}
 
 	/**
 	 * Allows to query a set of records that match the specified conditions
 	 *
 	 * @param mixed $parameters
-	 * @return ChemicalMoieties[]
+	 * @return AchievementIndex[]
 	 */
 	public static function find($parameters = null)
 	{
@@ -202,7 +203,7 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 	 * Allows to query the first record that match the specified conditions
 	 *
 	 * @param mixed $parameters
-	 * @return ChemicalMoieties
+	 * @return AchievementIndex
 	 */
 	public static function findFirst($parameters = null)
 	{
@@ -221,7 +222,7 @@ class ChemicalMoieties extends \Phalcon\Mvc\Model
 			'id' => 'id',
 			'file_index_id' => 'file_index_id',
 			'name' => 'name',
-			'formula' => 'formula'
+			'description' => 'description'
 		];
 	}
 

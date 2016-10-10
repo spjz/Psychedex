@@ -6,7 +6,10 @@ use Psychedex\Models\Repositories\Repositories;
 class Effect
 {
 
-	// Article
+	// ToDo: ArticleAttachments
+	// ToDo: ArticleReferences
+
+	// Articles
 
 	/**
 	 * @param $effect_index_id
@@ -30,9 +33,9 @@ class Effect
 			->getByTimestampModified($order,$rows,$position);
 	}
 
-	// ToDo: Class
-	// ToDo: Domain
+	// ToDo: Classes
+	// ToDo: Domains
 	// ToDo: Index
-	// ToDo: Transformation
+	// ToDo: Transformations
 
 }

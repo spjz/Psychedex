@@ -2,6 +2,7 @@
 
 namespace Psychedex\Models\Entities;
 
+use Phalcon\Mvc\Model\Validator\Email as Email;
 use Phalcon\Validation;
 
 class UserIndex extends \Phalcon\Mvc\Model
@@ -15,6 +16,13 @@ class UserIndex extends \Phalcon\Mvc\Model
 	 * @Column(type="integer", length=11, nullable=false)
 	 */
 	protected $id;
+
+	/**
+	 *
+	 * @var integer
+	 * @Column(type="integer", length=11, nullable=true)
+	 */
+	protected $file_index_id;
 
 	/**
 	 *
@@ -87,6 +95,13 @@ class UserIndex extends \Phalcon\Mvc\Model
 	protected $timestamp_created;
 
 	/**
+	 *
+	 * @var string
+	 * @Column(type="string", nullable=false)
+	 */
+	protected $timestamp_modified;
+
+	/**
 	 * Method to set the value of field id
 	 *
 	 * @param integer $id
@@ -95,6 +110,19 @@ class UserIndex extends \Phalcon\Mvc\Model
 	public function setId($id)
 	{
 		$this->id = $id;
+
+		return $this;
+	}
+
+	/**
+	 * Method to set the value of field file_index_id
+	 *
+	 * @param integer $file_index_id
+	 * @return $this
+	 */
+	public function setFileIndexId($file_index_id)
+	{
+		$this->file_index_id = $file_index_id;
 
 		return $this;
 	}
@@ -230,6 +258,19 @@ class UserIndex extends \Phalcon\Mvc\Model
 	}
 
 	/**
+	 * Method to set the value of field timestamp_modified
+	 *
+	 * @param string $timestamp_modified
+	 * @return $this
+	 */
+	public function setTimestampModified($timestamp_modified)
+	{
+		$this->timestamp_modified = $timestamp_modified;
+
+		return $this;
+	}
+
+	/**
 	 * Returns the value of field id
 	 *
 	 * @return integer
@@ -237,6 +278,16 @@ class UserIndex extends \Phalcon\Mvc\Model
 	public function getId()
 	{
 		return $this->id;
+	}
+
+	/**
+	 * Returns the value of field file_index_id
+	 *
+	 * @return integer
+	 */
+	public function getFileIndexId()
+	{
+		return $this->file_index_id;
 	}
 
 	/**
@@ -340,6 +391,45 @@ class UserIndex extends \Phalcon\Mvc\Model
 	}
 
 	/**
+	 * Returns the value of field timestamp_modified
+	 *
+	 * @return string
+	 */
+	public function getTimestampModified()
+	{
+		return $this->timestamp_modified;
+	}
+
+	/**
+	 * Initialize method for model.
+	 */
+	public function initialize()
+	{
+		$this->hasMany('id', 'Psychedex\Models\Entities\EffectArticles', 'user_index_id_created', ['alias' => 'EffectArticles']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\EffectArticles', 'user_index_id_modified', ['alias' => 'EffectArticles']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\EffectIndex', 'user_index_id_created', ['alias' => 'EffectIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\EffectIndex', 'user_index_id_modified', ['alias' => 'EffectIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\ExperienceIndex', 'user_index_id', ['alias' => 'ExperienceIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\FileIndex', 'user_index_id_created', ['alias' => 'FileIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\FileIndex', 'user_index_id_modified', ['alias' => 'FileIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeIndex', 'user_index_id_created', ['alias' => 'MoleculeIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\MoleculeIndex', 'user_index_id_modified', ['alias' => 'MoleculeIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\SubstanceArticles', 'user_index_id_created', ['alias' => 'SubstanceArticles']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\SubstanceArticles', 'user_index_id_modified', ['alias' => 'SubstanceArticles']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\SubstanceIndex', 'user_index_created', ['alias' => 'SubstanceIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\SubstanceIndex', 'user_index_modified', ['alias' => 'SubstanceIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\TaxonomyIndex', 'user_index_id_created', ['alias' => 'TaxonomyIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\TaxonomyIndex', 'user_index_id_modified', ['alias' => 'TaxonomyIndex']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserAchievements', 'user_index_id', ['alias' => 'UserAchievements']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserPhysiology', 'user_index_id', ['alias' => 'UserPhysiology']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserPreferences', 'user_index_id', ['alias' => 'UserPreferences']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserPrivileges', 'user_index_id', ['alias' => 'UserPrivileges']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserSociology', 'user_index_id', ['alias' => 'UserSociology']);
+		$this->hasMany('id', 'Psychedex\Models\Entities\UserStash', 'user_index_id', ['alias' => 'UserStash']);
+		$this->belongsTo('file_index_id', 'Psychedex\Models\Entities\FileIndex', 'id', ['alias' => 'FileIndex']);
+	}
+
+	/**
 	 * Validations and business logic
 	 *
 	 * @return boolean
@@ -358,72 +448,59 @@ class UserIndex extends \Phalcon\Mvc\Model
 					"Date" => "Invalid: :field",
 				]
 			);
-		$validation
-			->add(
-				['hash', 'public_key', 'private_key', 'timestamp_created'],
-				new Validation\Validator\PresenceOf()
-			)
-			->add(['hash', 'name'], new Validation\Validator\Uniqueness())
-			->add('email', new Validation\Validator\Email())
-			->add(
-				['phone_code', 'phone_number'],
-				new Validation\Validator\Numericality()
-			)
-			->add(
+
+		$validation->add(
+			[
+				'hash',
+				'public_key',
+				'private_key',
 				'timestamp_created',
-				new Validation\Validator\Date(['format' => 'Y-m-d H:i:s'])
-			);
+				'timestamp_modified',
+			],
+			new Validation\Validator\PresenceOf()
+		);
+
+		$validation->add(
+			[
+				'hash',
+				'name',
+				'email',
+				'phone_number',
+				'token',
+				'cookie',
+			]
+			, new Validation\Validator\Uniqueness()
+		);
+
+		$validation->add(
+			[
+				'email',
+			],
+			new Validation\Validator\Email()
+		);
+
+		$validation->add(
+			[
+				'file_index_id',
+				'phone_code',
+				'phone_number',
+			],
+			new Validation\Validator\Numericality()
+		);
+
+		$validation->add(
+			[
+				'timestamp_created',
+				'timestamp_modified',
+			],
+			new Validation\Validator\Date(
+				[
+					'format' => 'Y-m-d H:i:s',
+				]
+			)
+		);
 
 		return $this->validate($validation);
-	}
-
-	/**
-	 * Initialize method for model.
-	 */
-	public function initialize()
-	{
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\ExperienceIndex',
-			'user_index_id',
-			['alias' => 'ExperienceIndex']
-		);
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\UserAchievements',
-			'user_index_id',
-			['alias' => 'UserAchievements']
-		);
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\UserPhysiology',
-			'user_index_id',
-			['alias' => 'UserPhysiology']
-		);
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\UserPreferences',
-			'user_index_id',
-			['alias' => 'UserPreferences']
-		);
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\UserPrivileges',
-			'user_index_id',
-			['alias' => 'UserPrivileges']
-		);
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\UserSociology',
-			'user_index_id',
-			['alias' => 'UserSociology']
-		);
-		$this->hasMany(
-			'id',
-			'Psychedex\Models\Entities\UserStash',
-			'user_index_id',
-			['alias' => 'UserStash']
-		);
 	}
 
 	/**
@@ -464,10 +541,11 @@ class UserIndex extends \Phalcon\Mvc\Model
 	 *
 	 * @return array
 	 */
-	public static function columnMap()
+	public function columnMap()
 	{
 		return [
 			'id' => 'id',
+			'file_index_id' => 'file_index_id',
 			'hash' => 'hash',
 			'name' => 'name',
 			'email' => 'email',
@@ -477,7 +555,8 @@ class UserIndex extends \Phalcon\Mvc\Model
 			'private_key' => 'private_key',
 			'token' => 'token',
 			'cookie' => 'cookie',
-			'timestamp_created' => 'timestamp_created'
+			'timestamp_created' => 'timestamp_created',
+			'timestamp_modified' => 'timestamp_modified'
 		];
 	}
 
