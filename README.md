@@ -1,5 +1,10 @@
 # Psychédex
-See the [Wiki](https://github.com/spjz/Psychedex/wiki) for structured informaiton.
+See the [Wiki](https://github.com/spjz/Psychedex/wiki) for structured information:
+
+- [Project justification, intentions, and primary goals](https://github.com/spjz/Psychedex/wiki/Project-justification,-intentions,-and-primary-goals)
+- [Intended and desired features, project scope boundaries](https://github.com/spjz/Psychedex/wiki/Intended-and-desired-features,-project-scope-boundaries)
+
+More articles to follow.
 
 ## Discussions
 
